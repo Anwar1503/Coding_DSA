@@ -1,0 +1,45 @@
+DSA INTERVIEW PREPARATION CHECKLIST
+
+Core Patterns to learn
+[ ] Hash Maps
+[ ] Two Pointers
+[ ] Sliding Window
+[ ] Stack
+[ ] Binary Search
+[ ] Prefix Sum
+[ ] BFS (Graphs)
+[ ] DFS (Trees/Graphs)
+[ ] Backtracking
+[ ] Heap / Priority Queue
+[ ] Linked List (Fast & Slow pointers)
+[ ] Design Problems (LRU Cache, Min Stack)
+
+Important Problem Types
+[ ] Arrays
+[ ] Strings
+[ ] Subarrays / Substrings
+[ ] Trees
+[ ] Graphs
+[ ] Caching / Design problems
+
+set of topics to cover
+topic 1:
+[ ] Arrays
+[ ] Hash Map problems
+
+topic 2:
+[ ] Strings
+[ ] Sliding Window
+
+topic 3:
+[ ] Stack
+[ ] Binary Search
+
+topic 4:
+[ ] Trees
+[ ] Graph traversal (BFS/DFS)
+
+topic 5:
+[ ] System design style problems
+[ ] LRU Cache / Design questions
+
