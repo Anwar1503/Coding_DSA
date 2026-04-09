@@ -1,0 +1,35 @@
+OS + CPP
+
+Memory & Resource Management
+
+Stack vs heap, new/delete, and why you should rarely use them raw
+RAII (Resource Acquisition Is Initialization) — the single most important C++ pattern for systems work
+Smart pointers: unique_ptr, shared_ptr, weak_ptr
+
+Pointers & References, Deeper
+
+Pointer arithmetic, const correctness
+void*, function pointers, and when OS APIs force you to use them
+References vs pointers — and when the distinction matters at the ABI level
+
+Move Semantics & Value Categories
+
+lvalues, rvalues, std::move, move constructors
+Why this matters for performance in systems code
+
+Concurrency
+
+std::thread, mutexes, condition variables
+Memory model and std::atomic — critical for lock-free programming
+How this maps to actual OS primitives (pthreads, futexes)
+
+Low-level Features
+
+volatile, mmap, ioctl-style patterns
+Inline assembly basics
+Undefined behavior — and why it can silently destroy systems code
+
+Templates & Compile-time Programming
+
+Template metaprogramming for zero-overhead abstractions
+constexpr, if constexpr

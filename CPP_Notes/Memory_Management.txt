@@ -1,0 +1,108 @@
+###Memory allocation in cpp
+
+In cpp we allocate memory using :
+    new operator 
+    delete operator
+
+
+1. Stack vs Heap 
+
+Stack : 
+void foo(){
+    int x =10;
+    char buf[256];
+}
+
+the memory will be deleted automatically here 
+
+stack follows LIFO.
+
+it follows the memory stack 
+stack overflow happens when there is no endingpoint
+
+
+Heap or(Dynamic memory allocation):
+
+heap memory limitaion can be incraesed as big as Virtual memory of the system
+new and delete comes here
+
+
+int main(){
+    int a = 10;
+    int *p = new int();
+    *p = 10;
+    delete(p);
+
+    p =new int[4];
+    delete[] p;
+    p = NULL;
+return 0;    
+}
+
+dangling pointer : points to address where there is no value at all.
+
+
+say :
+void some(){
+    int* buf = new int[1024];
+
+    if(some opration)
+    {
+        return ;
+    }
+    delete [] buf;
+}
+
+
+RAII
+Resource Acquistion is Initialization
+int main(){
+    try{
+        FileHandler file("som.txt");
+        file.readData();
+    }
+    catch(const std:exception & e){
+        DDEBUG("",e);
+    }
+    return 0;
+}
+
+RAII is mainly used in :
+    Memory Management (smart pointers)
+    File Handling
+    Locking resources
+
+
+smart Pointers:
+unique_ptr: Sole     
+
+    void fun(){
+        std::unique_ptr<int> p = std::make_unique<int>(42);
+        std::cout<< *p <<"\n";
+    }
+
+    std::unique_ptr<int> b = std::move(a);
+
+shared_ptr: share ownership    
+std::shared_ptr<int> a = std::make_shared<int>(10);
+
+
+Memory Layout of a Process
+When your C++ program runs, the OS gives it a virtual address space laid out like this:
+High addresses
+┌─────────────────────┐
+│       Stack         │  ← grows downward, local vars, function frames
+├─────────────────────┤
+│         ↓           │
+│    (unused gap)     │
+│         ↑           │
+├─────────────────────┤
+│       Heap          │  ← grows upward, dynamic allocations (new/malloc)
+├─────────────────────┤
+│    BSS segment      │  ← uninitialized global/static variables
+├─────────────────────┤
+│    Data segment     │  ← initialized global/static variables
+├─────────────────────┤
+│    Text segment     │  ← your compiled code (read-only)
+└─────────────────────┘
+Low addresses

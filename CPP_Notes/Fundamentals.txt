@@ -1,0 +1,39 @@
+## How a C++ actually works
+
+step:1 Source Code
+whatever the code we write in .cpp files
+
+step:2 Compiler
+this where our soucre coe turn out to machine code
+compiler checks for all preprocessing whatever we incluse #libarries and syntax error and all
+then goes on to make .obj or .o files and linking and finally .exe
+
+step:3 Machine Code
+.exe is what will provied all 0,1 from our source which machine or hardware understands
+
+step: 4 Output
+upon running exe we get our Output
+
+
+## Structure of C++
+
+#include<iostream>  Include Library
+
+using namespace std;   using standard Library
+
+int main(){    //program starts here
+
+    return 0;
+}
+
+quetion : why always int main () why not void?
+Answer : 
+
+In cpp we use int main() while it return 0 meaning code compiled succesful its a indication to OS the program executed successfully.
+
+Topic : Signed vs Unsigned Data Types
+
+Type	  Can store    negative?	Range type
+Signed	   ✅ Yes	   Negative + Positive
+Unsigned	❌ No	   Only Positive (including 0)
+
