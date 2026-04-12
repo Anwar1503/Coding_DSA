@@ -1,0 +1,31 @@
+Lvalues and Rvalues in c++
+
+instead of doing copying where it requires extra memory usage and all
+we go fro std::move()
+which uses memory well and no need of copying
+
+
+question:
+so if i do a is a vector and we do b as std::move(a) then what will be there in a and what if i try to access it?
+
+answer is :
+still we can use a 
+but it will be empty 
+better way to use it again:
+a.clear();
+then resue 
+
+
+things that won't work are 
+
+
+exmaple:
+void SetValue(int& x){
+    return x;
+}
+
+int main(){
+    int x = 10;
+    SetValue(i);//lvalue since it has adress and it accpets adsress(&)
+    SetValue(10);//rvalue cannot work since it is a value
+}

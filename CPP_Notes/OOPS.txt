@@ -1,0 +1,100 @@
+OOPS (Object-Oriented Programming System) CONCEPTS
+===================================================
+
+1. CLASS
+--------
+- Blueprint for creating objects
+- Contains data members (variables) and member functions (methods)
+- Syntax:
+    class ClassName {
+        access_specifier:
+            // data members
+            // member functions
+    };
+
+2. OBJECT
+---------
+- Instance of a class
+- Occupies memory and has identity
+- Syntax: ClassName objectName;
+
+3. ENCAPSULATION
+----------------
+- Wrapping data and functions into a single unit (class)
+- Data hiding: restricting direct access to some components
+- Achieved using access specifiers (private, protected, public)
+- Benefits: Data security, modularity, ease of maintenance
+
+4. ABSTRACTION
+--------------
+- Hiding complex implementation details and showing only essential features
+- Achieved through abstract classes and interfaces
+- Benefits: Simplicity, reusability, security
+
+5. INHERITANCE
+--------------
+- Acquiring properties from one class to another
+- Parent class (Base class) -> Child class (Derived class)
+- Types:
+    * Single: One parent, one child
+    * Multiple: Two parents, one child
+    * Multi-level: Grandparent -> Parent -> Child
+    * Hierarchical: One parent, multiple children
+    * Hybrid: Combination of above
+- Syntax:
+    class DerivedClass : accessSpecifier BaseClass { };
+
+6. POLYMORPHISM
+---------------
+- One name, multiple forms
+- Types:
+    * Compile-time (Static):
+        - Function Overloading: Same function, different parameters
+        - Operator Overloading: Redefining operators
+    * Run-time (Dynamic):
+        - Virtual Functions: Using function overriding
+        - Base class pointer pointing to derived class object
+
+7. CONSTRUCTORS
+---------------
+- Special member function called automatically when object is created
+- Same name as class
+- No return type
+- Types:
+    * Default Constructor
+    * Parameterized Constructor
+    * Copy Constructor
+
+8. DESTRUCTORS
+--------------
+- Special member function called when object is destroyed
+- Same name as class with ~ prefix
+- No return type
+- Used to release memory/resources
+
+9. ACCESS SPECIFIERS
+--------------------
+- public: Accessible from anywhere
+- private: Accessible only within class
+- protected: Accessible within class and derived classes
+
+10. KEY PRINCIPLES
+------------------
+- DRY (Don't Repeat Yourself)
+- Single Responsibility Principle
+- Open/Closed Principle
+- Liskov Substitution Principle
+- Interface Segregation Principle
+- Dependency Inversion Principle (SOLID)
+
+11. ADVANCED CONCEPTS
+---------------------
+- Virtual Functions & Pure Virtual Functions
+- Abstract Classes
+- Friend Functions & Friend Classes
+- Static Members
+- This Pointer
+- Operator Overloading
+- Copy Constructor & Assignment Operator
+- Templates in C++
+- Exception Handling
