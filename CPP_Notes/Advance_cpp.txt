@@ -1,0 +1,19 @@
+Concurrency / Multithreading in C++
+##std::thread, mutexes, condition variables
+
+std::thread:
+A way to run a function in parallel thread
+
+
+example:
+#include<iostream>
+#include<thread>
+
+void task(){
+    std::cout<<"running a task";
+}
+
+int main(){
+    std::thread t(task);
+    t.join();
+}
