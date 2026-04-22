@@ -1,0 +1,59 @@
+API whichever we create needs to be authorized
+
+we do this mainly by three ways:
+API keys 
+JWT tokens
+Oauth(third party authentication like Google account and so on)
+
+API keys :
+Like a password for an application, not a user.
+
+JWT tokens:
+A signed token that contains user data.
+
+✅ When to use:
+Stateless APIs
+Microservices
+Mobile/web apps
+👍 Pros:
+No DB lookup needed (stateless)
+Fast
+Scalable
+👎 Cons:
+Hard to revoke before expiry
+If stolen → usable until expiry
+Token size is bigger
+🧠 Analogy:
+
+Like a signed ID card — server trusts it because it’s signed.
+
+Oauth:
+Let users log in via another service (Google, GitHub, etc.) without sharing passwords
+
+🔄 Flow (simplified):
+User clicks login with Google
+Redirect to Google
+User approves
+You get an access token
+Use it to access user data
+Key roles:
+Resource Owner → User
+Client → Your app
+Authorization Server → Google
+Resource Server → API
+✅ When to use:
+Third-party login
+Accessing external APIs
+Enterprise apps
+👍 Pros:
+Very secure
+No password sharing
+Fine-grained permissions (scopes)
+👎 Cons:
+Complex
+Requires multiple redirects
+Needs proper setup
+🧠 Analogy:
+
+Like giving a valet key 🚗
+→ Limited access, not full control
