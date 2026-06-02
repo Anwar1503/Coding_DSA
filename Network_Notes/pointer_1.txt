@@ -1,0 +1,86 @@
+
+Computer Network Fundamentals
+
+1. Basic Concepts
+- Network: group of devices that communicate to share resources and data.
+- Node: any device on the network (PC, server, router, switch, IoT).
+- Link: physical or logical connection between nodes (copper, fiber, wireless).
+- Protocol: set of rules governing communication (syntax, semantics, timing).
+
+2. Models
+- OSI Model (7 layers):
+	1. Physical: raw bit transmission (cables, connectors, signaling)
+	2. Data Link: framing, MAC addressing, error detection (switches, ARP)
+	3. Network: logical addressing, routing (IP, routers)
+	4. Transport: end-to-end communication, reliability (TCP, UDP)
+	5. Session: connection management and control
+	6. Presentation: data representation, encryption
+	7. Application: network services and APIs (HTTP, SMTP)
+
+- TCP/IP (Internet) model: Link, Internet, Transport, Application — practical and widely used.
+
+3. Addressing
+- MAC address: 48-bit hardware address, used at Data Link layer.
+- IPv4: 32-bit address (dotted decimal). Classes historically, now CIDR.
+	- Example: 192.168.1.0/24 indicates network prefix and host space.
+- IPv6: 128-bit address, hexadecimal colon notation, built for scalability.
+- NAT: translates private IPs to public IP for internet access.
+
+4. Subnetting and CIDR
+- Subnet mask separates network and host portions (e.g., 255.255.255.0).
+- CIDR notation: /n denotes prefix length. Use to aggregate routes and conserve addresses.
+
+5. Routing and Switching
+- Switch: operates at Data Link layer; forwards frames by MAC address.
+- Router: operates at Network layer; forwards packets by IP address using routing tables.
+- Routing protocols: distance-vector (RIP), link-state (OSPF), path-vector (BGP).
+
+6. Transport Layer: TCP vs UDP
+- TCP: connection-oriented, reliable, ordered delivery, congestion control (three-way handshake).
+- UDP: connectionless, low overhead, no guaranteed delivery (good for DNS, VoIP).
+
+7. Common Protocols
+- HTTP/HTTPS: web protocols (HTTPS = HTTP over TLS/SSL).
+- FTP/SFTP: file transfer (SFTP uses SSH).
+- SMTP/IMAP/POP3: email transport and retrieval.
+- DNS: domain name resolution (name -> IP mapping).
+- DHCP: dynamic host configuration (automatically assigns IPs).
+
+8. Wireless Networking
+- Wi-Fi standards (802.11 a/b/g/n/ac/ax) differ in frequency, throughput, range.
+- Security: WEP (deprecated), WPA2, WPA3.
+
+9. Network Services and Utilities
+- ping: ICMP echo to test reachability and latency.
+- traceroute/tracert: path and hop diagnostics.
+- nslookup/dig: DNS lookups.
+- netstat: connection and socket info.
+
+10. Security Fundamentals
+- Firewall: filters traffic by rules (host-based or network-based).
+- VPN: secure tunnel for remote access and private connectivity.
+- TLS/SSL: cryptographic protocols for secure communication.
+- IDS/IPS: intrusion detection/prevention systems.
+
+11. Performance Metrics
+- Bandwidth: max data rate (throughput capacity).
+- Throughput: actual achieved data rate.
+- Latency: delay across the network (propagation, transmission, queuing).
+- Jitter: variation in packet delay (important for real-time apps).
+
+12. Advanced Concepts (brief)
+- VLANs: logical segmentation of switch domains to isolate broadcast domains.
+- QoS: prioritize traffic types (voice/video over bulk transfers).
+- Load balancing: distribute traffic across servers for scale and redundancy.
+
+13. Encapsulation
+- Data is wrapped with headers/trailers at each layer (application data -> TCP/UDP -> IP -> Ethernet -> physical bits).
+
+14. Troubleshooting Workflow
+- Verify physical connectivity, check IP addressing and subnet masks, test reachability (ping), trace path (traceroute), inspect port/service availability, review firewall/NAT rules, consult logs.
+
+15. Quick Cheat-sheet
+- Well-known ports: 80 HTTP, 443 HTTPS, 22 SSH, 25 SMTP, 53 DNS, 67/68 DHCP.
+- Common commands: ping, traceroute, ipconfig/ifconfig, netstat, ss, tcpdump/wireshark, nslookup/dig.
+
+End of notes

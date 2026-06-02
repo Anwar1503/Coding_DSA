@@ -1,0 +1,117 @@
+======== NETWORKING DEVICES ========
+
+1. ROUTER
+Definition: A networking device that forwards data packets between computer networks. It determines the best path for data to travel from source to destination.
+
+Uses:
+- Connects multiple networks (LAN to WAN)
+- Internet connectivity (connects home/office to ISP)
+- Creates subnets and manages IP addressing
+- Network security and firewall capabilities
+- Controls traffic between different network segments
+
+Example: Your home WiFi router connects your devices to the internet
+
+---
+
+2. SWITCH
+Definition: A network device that connects multiple devices within the same network and uses MAC addresses to forward frames to the correct physical port.
+
+Uses:
+- Connects devices within a Local Area Network (LAN)
+- Creates multiple collision domains (improves network efficiency)
+- Reduces bandwidth wastage compared to hubs
+- Managed switches can segment networks (VLAN)
+- Used in offices, data centers for internal connectivity
+
+Example: Office switch connecting all computers and printers in one floor
+
+---
+
+3. HUB
+Definition: A basic networking device that connects multiple devices and broadcasts incoming data to all ports (except the source port). Works at Layer 1 (Physical Layer).
+
+Uses:
+- Simple network expansion (legacy technology)
+- Minimal cost solutions for small networks
+- All connected devices share the same bandwidth
+- Creates a single collision domain
+
+Limitations: Inefficient, slower, outdated (mostly replaced by switches)
+
+---
+
+======== TCP vs UDP ========
+
+1. TCP (Transmission Control Protocol)
+
+Characteristics:
+- Connection-oriented (establishes connection before sending data)
+- Reliable delivery (ensures data arrives in correct order, no loss)
+- Ordered delivery (data received in same sequence as sent)
+- Slower (due to error checking and acknowledgments)
+- Requires more resources
+- Uses flow control and congestion control
+
+Where Used:
+- Email (SMTP, POP3, IMAP)
+- Web browsing (HTTP/HTTPS)
+- File transfer (FTP, SFTP)
+- Remote access (SSH, Telnet)
+- Database operations
+- Banking and financial transactions
+
+Why: When data accuracy and order matter more than speed
+
+---
+
+2. UDP (User Datagram Protocol)
+
+Characteristics:
+- Connectionless (sends data without establishing connection)
+- Unreliable delivery (no guarantee data arrives)
+- No ordering guarantee (packets can arrive out of sequence)
+- Faster (minimal overhead)
+- Low resource usage
+- No flow control or error correction
+
+Where Used:
+- Live video/audio streaming (YouTube, Zoom, Netflix)
+- Online gaming (multiplayer games - FPS, MOBA)
+- VoIP (Voice over IP calls)
+- DNS queries
+- Live sports broadcasts
+- IoT devices
+
+Why: Speed and low latency matter more than perfect accuracy
+
+---
+
+======== QUICK COMPARISON ========
+
+TCP vs UDP:
+┌─────────────────┬──────────────┬──────────────┐
+│ Feature         │ TCP          │ UDP          │
+├─────────────────┼──────────────┼──────────────┤
+│ Connection      │ Required     │ Not required │
+│ Reliability     │ High         │ Low          │
+│ Speed           │ Slower       │ Faster       │
+│ Order           │ Guaranteed   │ Not guaranteed│
+│ Overhead        │ High         │ Low          │
+│ Use Case        │ Accuracy     │ Speed        │
+└─────────────────┴──────────────┴──────────────┘
+
+---
+
+======== WHEN TO USE WHAT ========
+
+Use TCP when:
+✓ Data integrity is critical (banking, emails)
+✓ All packets must be received
+✓ Order of data matters
+
+Use UDP when:
+✓ Speed is critical (gaming, streaming)
+✓ Some data loss is acceptable
+✓ Real-time communication needed
+✓ Broadcasting/multicasting required
