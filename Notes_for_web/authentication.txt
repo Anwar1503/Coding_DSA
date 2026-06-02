@@ -1,0 +1,43 @@
+# 7 Authentication Concepts Every Developer Should Know
+
+## 1. Basic Authentication
+- Simplest form using username and password.
+- Credentials sent in HTTP headers (Base64 encoded).
+- Insecure over plain HTTP; use HTTPS.
+- Example: `Authorization: Basic dXNlcjpwYXNz`
+
+## 2. Session-Based Authentication
+- Server creates a session after login, stores session ID in cookie.
+- Client sends session ID with each request.
+- Server validates session on each request.
+- Common in web apps; requires server-side storage.
+
+## 3. Token-Based Authentication
+- Uses tokens (e.g., JWT) instead of sessions.
+- Token contains user info and is signed.
+- Stateless; client stores token (e.g., in localStorage).
+- Example: Bearer token in Authorization header.
+
+## 4. OAuth
+- Protocol for delegated access.
+- Allows third-party apps to access resources without sharing credentials.
+- Involves authorization server, resource owner, client.
+- Common flows: Authorization Code, Implicit, Client Credentials.
+
+## 5. Multi-Factor Authentication (MFA)
+- Requires multiple verification methods (e.g., password + SMS code).
+- Adds security layer beyond passwords.
+- Types: Something you know, have, are.
+- Implementations: TOTP, hardware keys.
+
+## 6. Password Hashing
+- Never store plain passwords; use hashing algorithms like bcrypt or Argon2.
+- Includes salt to prevent rainbow table attacks.
+- Verify by hashing input and comparing.
+- Avoid outdated methods like MD5.
+
+## 7. Single Sign-On (SSO)
+- Allows users to log in once and access multiple applications.
+- Uses protocols like SAML or OAuth.
+- Central identity provider manages authentication.
+- Improves user experience and security.
