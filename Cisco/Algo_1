@@ -1,0 +1,108 @@
+C++ (STL, smart pointers, OOP, memory management)
+Linux basics
+Processes vs threads
+Networking fundamentals
+TCP vs UDP
+HTTP
+DNS
+Sockets
+Docker and containers (basic understanding)
+Your project architecture and contributions
+
+
+
+Today's DSA Plan (4–6 hours)
+1. Arrays & Strings (Highest Priority)
+
+Make sure you can solve:
+
+Two Sum
+Best Time to Buy and Sell Stock
+Move Zeroes
+Remove Duplicates
+Valid Anagram
+Longest Substring Without Repeating Characters
+
+Concepts:
+
+Two pointers
+Sliding window
+Hashing
+2. Linked Lists
+
+Very common for 1–3 year experience interviews.
+
+Problems:
+
+Reverse Linked List
+Middle of Linked List
+Detect Cycle
+Merge Two Sorted Lists
+
+Concepts:
+
+Fast/slow pointers
+Pointer manipulation
+3. Stack & Queue
+
+Problems:
+
+Valid Parentheses
+Min Stack
+Implement Queue using Stacks
+Next Greater Element
+
+Concepts:
+
+LIFO/FIFO
+Monotonic stack
+4. Binary Search
+
+Extremely important.
+
+Concepts:
+
+Standard binary search
+First/last occurrence
+Search in rotated array
+
+Problems:
+
+Binary Search
+Search Insert Position
+Find Peak Element
+5. Trees (At Least Basics)
+
+Problems:
+
+Inorder Traversal
+Maximum Depth
+Same Tree
+Lowest Common Ancestor
+
+Concepts:
+
+DFS
+BFS
+If You Have Extra Time
+Hash Maps
+
+Know when to use:
+
+Frequency counting
+Lookup optimization
+Recursion
+
+Understand:
+
+Base case
+Recursive calls
+Stack frames
+Skip For Today
+
+These are important later, but not today's focus:
+
+Advanced Dynamic Programming
+Tries
+Segment Trees
+Advanced Graph Algorithms
