@@ -1,0 +1,73 @@
+🔴 Priority 1 — definitely learn
+
+Python
+OOP
+exceptions
+generators
+decorators
+context managers
+os
+pathlib
+subprocess
+logging
+argparse
+JSON/YAML
+
+Linux
+processes
+threads
+filesystem
+permissions
+environment variables
+pipes
+signals
+fork/exec
+stdout/stderr
+shell basics
+
+🟠 Priority 2 — very useful
+
+Testing
+
+pytest
+fixtures
+mocking
+unit/integration testing
+
+Packaging
+
+virtual environments
+pip
+pyproject.toml
+packages/modules
+dependencies
+wheels
+versioning
+
+Performance
+
+CPU
+memory
+filesystem
+profiling
+top
+ps
+time
+🟡 Priority 3 — understand conceptually
+CI/CD
+release automation
+backward compatibility
+containers
+concurrency
+caching
+scalable architecture
+job schedulers
+🟢 Priority 4 — don't worry too much initially
+EDA
+semiconductor workflows
+Arm SoC methodology
+specialized engineering tools
+
+
+question to solve:
+"Write a Python script using the subprocess module that executes a tool, redirects its stderr to a log file, sets a timeout constraint of 10 minutes, and terminates cleanly if it hangs."
