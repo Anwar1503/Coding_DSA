@@ -1,0 +1,14 @@
+Arm Architecture Basics
+RISC design: Arm processors use a Reduced Instruction Set Computing model — fewer, simpler instructions that execute faster and consume less power.
+
+Pipeline stages: Typical Arm cores use 3–11 stage pipelines (fetch, decode, execute, memory, write-back). This balances speed and efficiency.
+
+Registers: Arm has 16 general-purpose registers (R0–R15), plus special registers like Program Counter (PC) and Stack Pointer (SP).
+
+Instruction sets:
+
+Thumb: 16-bit compressed instructions for smaller code size.
+
+AArch32/AArch64: 32-bit and 64-bit execution states.
+
+Memory model: Load/store architecture — only load/store instructions access memory, arithmetic happens in registers.
