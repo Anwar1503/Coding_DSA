@@ -1,0 +1,180 @@
+Reverse Proxy vs API Gateway vs Load Balancer
+
+1. Reverse Proxy
+Definition:
+- A reverse proxy sits in front of one or more backend servers.
+- Clients connect to the reverse proxy, and the proxy forwards the request to the appropriate backend.
+- The client sees only the proxy, not the actual server details.
+
+Flow:
+Client -> Reverse Proxy -> Server(s)
+
+Use cases:
+- Hide backend architecture and IPs
+- SSL termination
+- Caching static content
+- Compression
+- Request filtering and security
+- Rate limiting and request shaping
+- Load distribution across multiple instances
+
+Examples:
+- Nginx
+- Envoy
+- HAProxy
+- Apache
+
+Advantages:
+- Improves security by masking internal services
+- Reduces direct exposure of backend servers
+- Improves performance using caching and compression
+- Simplifies TLS management
+
+Limitations:
+- Extra hop in the request path
+- Can become a single point of failure if not made highly available
+- Requires tuning for performance and reliability
+
+
+2. Forward Proxy
+Definition:
+- A forward proxy is used by clients to access external resources on behalf of the client.
+- Example: corporate proxy, VPN-related proxying, browser proxy.
+
+Flow:
+Client -> Forward Proxy -> Internet / External Server
+
+Common use:
+- Access control
+- Content filtering
+- Privacy and monitoring
+- Bypass network restrictions
+
+Note:
+- Reverse proxy is server-side.
+- Forward proxy is client-side.
+
+
+3. API Gateway
+Definition:
+- An API gateway is a specialized reverse proxy built for APIs.
+- It sits in front of microservices and manages API traffic centrally.
+
+Responsibilities:
+- Route requests to correct service
+- Auth and authorization
+- Rate limiting and quota enforcement
+- Request and response transformation
+- Protocol translation (REST, gRPC, HTTP, WebSocket, etc.)
+- API versioning
+- Caching and monitoring
+- Circuit breakers and retries
+- Analytics and observability
+
+Typical flow:
+Client -> API Gateway -> Microservice A / B / C
+
+Example features:
+- JWT validation
+- User-level quotas
+- API key verification
+- Traffic policies per endpoint
+- Canary releases and routing rules
+
+Difference from reverse proxy:
+- Reverse proxy is more generic and network-focused.
+- API gateway is application-aware and business/API-focused.
+
+
+4. Load Balancer
+Definition:
+- A load balancer distributes incoming traffic across multiple backend servers to improve availability, scalability, and performance.
+
+Purpose:
+- Prevent one server from getting overloaded
+- Increase fault tolerance
+- Improve throughput and latency
+
+Types:
+- Layer 4 (L4): works on TCP/UDP connection level
+- Layer 7 (L7): works on HTTP request content, headers, paths, etc.
+
+Example flow:
+Client -> Load Balancer -> Server 1 / Server 2 / Server 3
+
+Features:
+- Health checks
+- Sticky sessions (session affinity)
+- Round robin / weighted routing
+- Failover
+
+Difference from reverse proxy:
+- Load balancing is about distributing traffic evenly.
+- Reverse proxy can also route traffic, but its focus is also security, optimization, and abstraction.
+
+
+5. Key Differences
+
+Reverse Proxy:
+- Sits in front of servers
+- Hides backend infrastructure
+- Can cache, terminate TLS, filter traffic
+- Generic traffic proxy
+
+API Gateway:
+- Special form of reverse proxy for APIs
+- Focused on API policies and service composition
+- Handles authentication, rate limiting, transformations
+
+Load Balancer:
+- Focused on traffic distribution
+- Improves scalability and availability
+- Usually does not handle API business logic
+
+
+6. Real-World Architecture
+A common pattern:
+Client
+  -> DNS / Edge
+  -> Load Balancer (optional)
+  -> Reverse Proxy / API Gateway
+  -> Backend application servers
+  -> Database / Cache / Third-party services
+
+
+7. Interview-Friendly Summary
+- Reverse Proxy: hides backend servers and manages incoming request flow.
+- API Gateway: a reverse proxy for APIs with policy, auth, and routing logic.
+- Load Balancer: spreads requests across servers for availability and scaling.
+
+One-liner:
+- Reverse proxy = traffic interception and control.
+- API gateway = API-specific traffic management.
+- Load balancer = traffic distribution across instances.
+
+
+8. Important Note
+A reverse proxy and a load balancer can sometimes be the same tool or be combined together, but their responsibilities are conceptually different.
+
+Example:
+- Nginx can act as a reverse proxy and also perform load balancing.
+- An API gateway often uses reverse proxy features internally.
+
+
+9. Short Interview Answer
+"A reverse proxy sits in front of backend servers and forwards client requests while hiding server details and improving security, caching, and TLS handling. An API gateway is a reverse proxy specialized for APIs, managing auth, routing, quotas, and transformations. A load balancer distributes traffic across multiple servers to improve availability and scalability."
+
+
+10. Very Short Revision Version
+Client
+  -> Reverse Proxy / API Gateway / Load Balancer
+  -> Backend Services
+
+- Reverse Proxy: security + masking + caching + TLS
+- API Gateway: API-specific routing + auth + policies
+- Load Balancer: distribute traffic across servers
+
+11. One-Line Memory Trick
+Reverse proxy = hides servers
+API gateway = manages APIs
+Load balancer = spreads traffic
