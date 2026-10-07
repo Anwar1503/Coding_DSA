@@ -1,0 +1,14 @@
+# VS Code
+.vscode/
+
+# Build output
+build/
+bin/
+obj/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
