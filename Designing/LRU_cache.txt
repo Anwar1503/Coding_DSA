@@ -1,0 +1,106 @@
+LRU CACHE (LEAST RECENTLY USED)
+
+1. Definition
+- A cache stores recently used data so future requests can be served faster.
+- LRU is an eviction policy: when the cache is full, remove the item that has not been used for the longest time.
+- "Use" usually means a successful get or a put/update.
+
+Example:
+Capacity = 3
+put(A), put(B), put(C)       -> order: C, B, A (most recent to least recent)
+get(A)                       -> order: A, C, B
+put(D)                       -> evict B; order: D, A, C
+
+
+2. Required Operations
+- get(key): return the value if present; otherwise return a miss result.
+- put(key, value): insert or update a key, and evict one item if over capacity.
+- Both operations should be O(1) average time.
+- Space usage is O(capacity).
+
+
+3. Data Structures
+Use two structures together:
+
+Hash map:
+- Maps each key to its node in the linked list.
+- Provides O(1) average lookup by key.
+
+Doubly linked list:
+- Stores entries in recency order.
+- Most recently used (MRU) node is near the head.
+- Least recently used (LRU) node is near the tail.
+- A doubly linked list allows any node to be removed and reinserted in O(1).
+
+Recommended layout with sentinel nodes:
+HEAD <-> MRU <-> ... <-> LRU <-> TAIL
+- HEAD and TAIL are dummy nodes; they contain no cache entry.
+- Sentinels avoid special cases when inserting/removing at either end.
+- Store key and value in each real node. The key is needed to remove the evicted entry from the map.
+
+
+4. Operation Logic
+
+get(key):
+1. Look up key in the map.
+2. If absent, return a miss result.
+3. If present, move its node to the MRU position (right after HEAD).
+4. Return the node's value.
+
+put(key, value):
+1. If capacity is zero, do not store the item (or reject construction, according to the API contract).
+2. If key already exists, update its value and move its node to MRU.
+3. Otherwise, create a node, add it to the map, and insert it at MRU.
+4. If size exceeds capacity, remove the node immediately before TAIL (the LRU node) and delete its key from the map.
+
+Helper operations:
+- remove(node): reconnect node.prev and node.next.
+- add_to_front(node): insert node immediately after HEAD.
+- move_to_front(node): remove(node), then add_to_front(node).
+- pop_lru(): remove and return the node immediately before TAIL.
+
+
+5. Why Both Structures Are Needed
+- A list alone can identify the LRU item, but finding an arbitrary key takes O(n).
+- A map alone can find a key quickly, but does not track which key is least recently used.
+- Together, the map finds a node and the list updates recency in O(1) average time.
+
+
+6. Complexity
+- get: O(1) average time.
+- put/update: O(1) average time.
+- Eviction: O(1).
+- Space: O(capacity).
+- Hash-map operations are O(1) average, not guaranteed worst-case.
+
+
+7. Important Edge Cases
+- Capacity is zero or negative: define and validate the behavior.
+- Get a missing key: return a clearly documented miss value/result.
+- Put an existing key: update value and mark it most recently used.
+- Get or update the current LRU item: it becomes MRU, so a different item may be evicted next.
+- Capacity one: every insertion of a different key evicts the previous key.
+- Avoid evicting sentinel nodes; only evict when there is a real node before TAIL.
+- Decide whether failed gets affect recency. Standard LRU does not change order on a miss.
+
+
+8. Common Mistakes
+- Using a singly linked list and scanning to find the previous node (makes operations O(n)).
+- Updating the list but forgetting to update the map during eviction.
+- Forgetting to move a node after a successful get.
+- Failing to move an existing key to MRU after put/update.
+- Storing only values in nodes, making it difficult to remove the evicted key from the map.
+- Mixing up MRU and LRU ends.
+
+
+9. Testing Checklist
+- Insert up to capacity and verify no eviction occurs early.
+- Insert one more item and verify the oldest unused item is evicted.
+- Access an old item, insert another item, and verify the accessed item survives.
+- Update an existing key and verify size does not increase.
+- Test missing get, capacity one, and zero capacity.
+- After each operation, verify map/list contain the same keys and list order is correct.
+
+
+10. Interview Summary
+"I would combine a hash map with a doubly linked list. The map locates each cache node in O(1) average time, while the list keeps nodes ordered by recency. Successful gets and puts move a node to the front; when capacity is exceeded, I remove the node at the back and delete its key from the map. This gives O(1) average get and put operations and O(capacity) space."

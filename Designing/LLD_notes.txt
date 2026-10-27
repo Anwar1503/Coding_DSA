@@ -1,0 +1,278 @@
+LOW-LEVEL DESIGN (LLD) NOTES
+
+1. What Is LLD?
+- Low-Level Design describes how the internals of a software component or application are organized.
+- It turns requirements into classes, interfaces, methods, data models, and interactions.
+- LLD is often called object-oriented design (OOD), though good LLD is not limited to object-oriented languages.
+
+LLD typically answers:
+- What are the main objects or modules?
+- What responsibilities does each one have?
+- How do they communicate?
+- What data do they own, and how does that data change?
+- How can the design handle errors, extensions, and testing?
+
+
+2. LLD vs HLD
+
+Low-Level Design:
+- Focus: component internals and object interactions.
+- Describes: classes, interfaces, methods, fields, relationships, and important flows.
+- Example: how a parking system assigns a spot and calculates a fee.
+
+High-Level Design (HLD):
+- Focus: overall architecture and system boundaries.
+- Describes: services, databases, APIs, queues, scaling, availability, and deployment.
+- Example: how parking-lot services communicate and store data across locations.
+
+The boundary can vary by interview. State assumptions and keep the design at the requested level.
+
+
+3. A Repeatable Interview Workflow
+
+Step 1 — Clarify requirements
+- Ask what the system must do and what is out of scope.
+- Identify actors, key use cases, and important rules.
+- Clarify constraints such as capacity, concurrency, persistence, or pricing.
+- Separate functional requirements (features) from non-functional requirements (quality attributes).
+
+Step 2 — Identify core domain concepts
+- Extract important nouns from requirements as candidate entities/value objects.
+- Extract actions as candidate methods or services.
+- Do not turn every noun into a class; keep only concepts with useful state or behavior.
+
+Step 3 — Define responsibilities
+- Give each class one clear reason to change.
+- Decide which object owns each piece of state and enforces each business rule.
+- Keep orchestration separate from domain rules where that improves clarity.
+
+Step 4 — Define APIs and relationships
+- Specify public methods with inputs, outputs, and failure behavior.
+- Show associations, composition, inheritance, or interface implementation only when meaningful.
+- Prefer composition over inheritance unless a genuine is-a relationship exists.
+
+Step 5 — Walk through key scenarios
+- Trace a normal success flow, an error flow, and relevant boundary cases.
+- Check that object state remains valid after every operation.
+
+Step 6 — Review extensibility and quality
+- Apply SOLID principles where they improve the design, not as a checklist exercise.
+- Discuss concurrency, persistence, and testing if the requirements call for them.
+- Mention trade-offs and what would change if requirements grow.
+
+
+4. Functional and Non-Functional Requirements
+
+Functional requirements describe behavior:
+- Create, update, retrieve, or cancel an entity.
+- Apply a rule, such as selecting an available spot or calculating a price.
+- Notify an actor or produce a receipt.
+
+Non-functional requirements describe quality constraints:
+- Performance and expected scale.
+- Reliability and data consistency.
+- Security and authorization.
+- Maintainability, testability, and extensibility.
+- Concurrency expectations.
+
+For an LLD interview, first establish the functional scope. Include non-functional detail when it affects class or API design.
+
+
+5. Modeling Building Blocks
+
+Entity:
+- Has identity and lifecycle; two entities may have the same field values but remain distinct.
+- Example: a particular booking or user account.
+
+Value object:
+- Represents a value, usually immutable and compared by its contents.
+- Example: Money, DateRange, or Coordinates.
+
+Service:
+- Holds domain logic that does not naturally belong to one entity, or coordinates a use case.
+- Keep services cohesive; avoid a single giant service that owns everything.
+
+Repository:
+- Provides an abstraction for storing and retrieving domain objects.
+- Keeps persistence details separate from business rules.
+
+Factory:
+- Encapsulates complex object creation or ensures valid construction.
+
+Controller / application handler:
+- Receives an external request, validates or translates it, invokes application logic, and forms a response.
+- It should not become the home for all business rules.
+
+
+6. Relationships and UML Vocabulary
+
+Association:
+- One object knows about or uses another.
+
+Aggregation:
+- A weak whole-part relationship; the part can exist independently of the whole.
+
+Composition:
+- A strong ownership relationship; the part's lifecycle is tied to the whole.
+
+Inheritance:
+- An is-a relationship. Use when subclasses can safely substitute for the base type.
+
+Interface implementation:
+- A class promises to support a contract, allowing callers to depend on behavior rather than a concrete implementation.
+
+Multiplicity examples:
+- 1: exactly one.
+- 0..1: optional.
+- 1..*: one or more.
+- 0..*: zero or more.
+
+Avoid adding inheritance or elaborate UML when a simple field, collection, or interface is clearer.
+
+
+7. SOLID Principles
+
+S — Single Responsibility Principle:
+- A module should have one focused responsibility and one main reason to change.
+
+O — Open/Closed Principle:
+- Prefer designs that can add behavior through new implementations or composition without repeatedly editing stable core logic.
+
+L — Liskov Substitution Principle:
+- A subtype should preserve the expectations and contract of its base type.
+
+I — Interface Segregation Principle:
+- Prefer small, role-focused interfaces over one broad interface that forces unused methods on implementers.
+
+D — Dependency Inversion Principle:
+- High-level policy should depend on abstractions, not directly on low-level details.
+- Inject dependencies where it improves replacement and testability.
+
+Use these principles to solve actual coupling or change problems; unnecessary abstractions can make a small design harder to understand.
+
+
+8. Common Design Patterns
+
+Strategy:
+- Encapsulates interchangeable algorithms behind a common contract.
+- Example: different pricing or fee-calculation policies.
+
+Factory:
+- Centralizes complex creation or selects an appropriate implementation.
+
+Observer:
+- Notifies subscribers when an event or state change occurs.
+- Example: publish booking-created events to notification handlers.
+
+Decorator:
+- Adds behavior around an object while preserving its interface.
+- Example: add logging or metrics around a service.
+
+State:
+- Represents behavior that changes based on an object's current state.
+- Example: an order behaves differently when pending, paid, or cancelled.
+
+Adapter:
+- Converts one interface into another expected by a caller.
+- Example: wrap a third-party payment provider.
+
+Use a pattern when it makes a concrete variation, dependency, or lifecycle clearer—not just to demonstrate pattern knowledge.
+
+
+9. API and Class Design Checklist
+- Are names clear and based on domain language?
+- Does each class have a focused responsibility?
+- Are fields private or otherwise protected behind valid operations where appropriate?
+- Do methods express behavior rather than expose arbitrary internal mutation?
+- Are constructors/factories able to prevent invalid states?
+- Are return values and error cases explicit?
+- Are collection ownership and mutability clear?
+- Can external dependencies be replaced in tests?
+- Are interfaces narrow and useful?
+- Are duplicate sources of truth avoided?
+
+
+10. State, Errors, and Concurrency
+
+State:
+- Write down important states and allowed transitions.
+- Enforce invariants at the object or service boundary that owns the state.
+- Avoid representing one fact in multiple places unless synchronization is explicit.
+
+Errors:
+- Decide how expected failures are represented: result types, exceptions, or another project convention.
+- Distinguish invalid input, missing data, conflicts, and infrastructure failures.
+- Do not silently swallow failures.
+
+Concurrency:
+- Ask whether simultaneous operations can affect the same data.
+- Identify the critical operation that must be atomic, such as reserving one available item.
+- Choose synchronization, transactions, or optimistic concurrency appropriate to the language and persistence layer.
+- Do not claim thread safety without defining what is protected and at what scope.
+
+
+11. Example: Parking Lot (Small Scope)
+
+Possible requirements:
+- Park a vehicle in a compatible available spot.
+- Remove a parked vehicle and calculate the fee.
+- Support multiple vehicle and spot types.
+
+Candidate domain types:
+- Vehicle: identity and vehicle type.
+- ParkingSpot: identifier, supported type, and availability/occupancy state.
+- ParkingTicket: vehicle, assigned spot, entry time, and lifecycle state.
+- ParkingLot: coordinates floors or spot collections; avoid putting every rule here.
+- SpotAssignmentStrategy: selects a compatible available spot.
+- FeeStrategy: calculates a charge based on the pricing policy.
+- ParkingService: coordinates park/exit use cases and uses repositories/strategies.
+
+Illustrative flow — park:
+1. Request arrives with a vehicle.
+2. ParkingService asks SpotAssignmentStrategy for a compatible available spot.
+3. The selected spot is reserved/occupied according to the concurrency contract.
+4. A ParkingTicket is created and returned.
+5. If no compatible spot exists, return a documented unavailable result.
+
+Illustrative flow — exit:
+1. Validate the ticket and its state.
+2. Calculate the fee using FeeStrategy and elapsed time.
+3. Complete payment if payment is in scope.
+4. Mark the ticket complete and release the spot.
+
+Design choices depend on requirements. For example, multiple floors, reservations, payments, and concurrent gates may require additional types and stronger transactional coordination.
+
+
+12. Testing LLD
+- Unit-test domain rules and state transitions.
+- Use fake or in-memory repositories to test services without a database.
+- Test strategy implementations independently.
+- Test failure cases: unavailable resource, invalid transition, duplicate request, and dependency failure.
+- Add integration tests for persistence or third-party adapters where needed.
+- Prefer testing observable behavior over private implementation details.
+
+
+13. Common Interview Mistakes
+- Coding before clarifying behavior and assumptions.
+- Creating too many classes before identifying responsibilities.
+- Putting all logic into a manager/controller class.
+- Using inheritance for code reuse without a true substitutable is-a relationship.
+- Adding patterns and interfaces without a likely change or testing benefit.
+- Ignoring state transitions, invalid inputs, and failure flows.
+- Ignoring concurrency for operations that allocate or modify shared resources.
+- Spending too long on UML instead of explaining a concrete use case.
+- Treating LLD as only class diagrams; method contracts and interactions matter too.
+
+
+14. Interview Presentation Template
+1. Restate the problem and confirm scope.
+2. List core use cases and assumptions.
+3. Identify entities, value objects, and important policies.
+4. Explain responsibilities and public APIs.
+5. Draw or describe relationships.
+6. Walk through one success flow and one failure flow.
+7. Cover edge cases, concurrency, and tests as relevant.
+8. Explain trade-offs and likely extension points.
+
+Short summary:
+"LLD translates requirements into cohesive components with clear responsibilities and contracts. I clarify scope, model the domain, design interactions around use cases, preserve invariants, and add abstractions only where they support real change, testing, or policy variation."
